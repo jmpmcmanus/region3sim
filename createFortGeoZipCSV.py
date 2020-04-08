@@ -1,4 +1,4 @@
-#!/home/jmpmcmanus/anaconda3/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import os
