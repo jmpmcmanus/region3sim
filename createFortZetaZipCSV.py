@@ -1,7 +1,7 @@
-#!/home/jmcmanus/anaconda3/envs/surge/bin/python
+#!/home/jmpmcmanus/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 
-import netCDF4, os, glob, pdb
+import netCDF4, os, glob
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings("error")
 
 def createZipFile(infile):
-    dirpath = 'data/zip/'
+    dirpath = '/home/jmpmcmanus/region3sim/data/zip/'
     if len([f for f in glob.glob(dirpath+"csvfort")]) == 0:
         os.mkdir(dirpath+"csvfort")
 
@@ -56,7 +56,7 @@ def createZipFile(infile):
 
         outzipfile.close()
 
-dirpath = 'data/ncfort/'
+dirpath = '/home/jmpmcmanus/region3sim/data/nc/'
 infiles = [f for f in glob.glob(dirpath+"*.nc")]
 infiles.sort()
 infile = infiles[2]

@@ -1,4 +1,4 @@
-#!/home/jmcmanus/anaconda3/envs/surge/bin/python
+#!/home/jmpmcmanus/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 
 import netCDF4, os
@@ -17,11 +17,11 @@ def createZipFile(infile):
 
     df = pd.DataFrame({'node': node, 'lon': lon, 'lat': lat, 'bathymetry': bathymetry}, columns=['node', 'lon', 'lat', 'bathymetry'])
 
-    outcsvfile = 'data/Region3Geo.csv'
+    outcsvfile = '/home/jmpmcmanus/data/csv/Region3Geo.csv'
     df.to_csv(outcsvfile, encoding='utf-8', header=True, index=False)
 
 
-dirpath = 'data/ncfort/'
-infile = 'BP1_dp1r1b1c1h1l1_fort.63_mod.nc'
+dirpath = '/home/jmpmcmanus/data/nc/'
+infile = 'bp1_dp1r2b1c2h1l1_fort.63_mod.nc'
 createZipFile(dirpath+infile)
 
