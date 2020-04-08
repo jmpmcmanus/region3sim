@@ -10,10 +10,9 @@ from zipfile import ZipFile
 import warnings
 warnings.filterwarnings("error")
 
-def createZipFile(infile):
-    dirpath = '/home/jmpmcmanus/data/zip/'
-    if len([f for f in glob.glob(dirpath+"csvfort")]) == 0:
-        os.mkdir(dirpath+"csvfort")
+def createZipFile(dirpath, infile):
+    if len([f for f in glob.glob(dirpath+"zip/"+"csvfort")]) == 0:
+        os.mkdir(dirpath+"zip/"+"csvfort")
 
     with xr.open_dataset(infile) as nc:
         startdate = datetime(2000,9,1,0,0,0)
@@ -29,7 +28,7 @@ def createZipFile(infile):
         node = np.arange(ncells)
 
         for i in range(ntime):
-            outzipfile = ZipFile(dirpath+".".join(infile.split('/')[len(infile.split('/'))-1].split('.')[0:2])+'.zip','a')
+            outzipfile = ZipFile(dirpath+"zip/"+".".join(infile.split('/')[len(infile.split('/'))-1].split('.')[0:2])+'.zip','a')
 
             try:
                 zeta = nc.variables['zeta'][i,:]
@@ -50,16 +49,16 @@ def createZipFile(infile):
             outcsvfile = "_".join(infile.split('/')[len(infile.split('/'))-1].split('_')[0:2]) + '_' + \
                   datetime.fromtimestamp(startsecond+time[i]).strftime("%Y-%m-%dT%H-%M-%S") + \
                   '.fort.63_mod.csv'
-            df.to_csv(dirpath+'csvfort/'+outcsvfile, encoding='utf-8', header=True, index=False)
-            outzipfile.write(dirpath+'csvfort/'+outcsvfile)
-            os.remove(dirpath+'csvfort/'+outcsvfile)
+            df.to_csv(dirpath+"zip/"+'csvfort/'+outcsvfile, encoding='utf-8', header=True, index=False)
+            outzipfile.write(dirpath+"zip/"+'csvfort/'+outcsvfile)
+            os.remove(dirpath+"zip/"+'csvfort/'+outcsvfile)
 
             outzipfile.close()
 
-dirpath = '/home/jmpmcmanus/data/nc/'
-infiles = [f for f in glob.glob(dirpath+"*.nc")]
+dirpath = '/home/jmpmcmanus/data/'
+infiles = [f for f in glob.glob(dirpath+"nc/"+"*.nc")]
 infiles.sort()
 infile = infiles[0]
 #for infile in infiles:
-createZipFile(infile.strip())
+createZipFile(dirpath, infile.strip())
 
