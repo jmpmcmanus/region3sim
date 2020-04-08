@@ -59,7 +59,7 @@ def createZipFile(infile):
 dirpath = '/home/jmpmcmanus/region3sim/data/nc/'
 infiles = [f for f in glob.glob(dirpath+"*.nc")]
 infiles.sort()
-infile = infiles[2]
+infile = infiles[0]
 #for infile in infiles:
 createZipFile(infile.strip())
 
