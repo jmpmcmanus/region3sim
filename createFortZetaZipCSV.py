@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings("error")
 
 def createZipFile(infile):
-    dirpath = '/home/jmpmcmanus/region3sim/data/zip/'
+    dirpath = '/home/jmpmcmanus/data/zip/'
     if len([f for f in glob.glob(dirpath+"csvfort")]) == 0:
         os.mkdir(dirpath+"csvfort")
 
@@ -56,7 +56,7 @@ def createZipFile(infile):
 
         outzipfile.close()
 
-dirpath = '/home/jmpmcmanus/region3sim/data/nc/'
+dirpath = '/home/jmpmcmanus/data/nc/'
 infiles = [f for f in glob.glob(dirpath+"*.nc")]
 infiles.sort()
 infile = infiles[0]
