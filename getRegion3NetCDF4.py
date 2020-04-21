@@ -1,4 +1,4 @@
-#!/home/jmpmcmanus/anaconda3/bin/python
+#!/home/data/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 
 import os, wget, sys

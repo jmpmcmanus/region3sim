@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/home/data/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 
 import psycopg2, glob
@@ -39,7 +39,7 @@ def createtable(tablename, timeinterval):
             conn.close()
 
 # Runs the programs.
-dirpath = "/var/lib/postgresql/data/zip/"
+dirpath = "/home/data/zip/"
 storms = [f for f in glob.glob(dirpath+"*.zip")]
 dirlength = len(dirpath)
 

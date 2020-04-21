@@ -1,16 +1,16 @@
-#!/usr/bin/python3
+#!/home/data/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 
 import os, time, glob
 from zipfile import ZipFile
 
 def ingestData(dirpath,inzip):
-    if len([f for f in glob.glob("ingest")]) == 0:
-        os.mkdir("ingest")
+    if len([f for f in glob.glob("/home/data/ingest")]) == 0:
+        os.mkdir("/home/data/ingest")
 
     tablename = inzip.split('.')[0].lower()
 
-    with open('ingest/'+tablename+'.csv', 'a') as file:
+    with open('/home/data/ingest/'+tablename+'.csv', 'a') as file:
         file.write('records_ingested,time_lapsed\n')
 
     file.close()
@@ -26,12 +26,12 @@ def ingestData(dirpath,inzip):
         output = stream.read()
 
         os.remove(dirpath+zipfile)
-        os.rmdir(dirpath+'/data/zip/csvfort')
+        os.rmdir(dirpath+'/home/data/zip/csvfort')
 
         stop_time = time.time()
         time_lapsed = stop_time - start_time
 
-        with open('ingest/'+tablename+'.csv', 'a') as file:
+        with open('/home/data/ingest/'+tablename+'.csv', 'a') as file:
             file.write(output.strip()+','+str(time_lapsed)+'\n')
 
         file.close()
@@ -40,7 +40,7 @@ def ingestData(dirpath,inzip):
     os.rmdir(dirpath+'/data/zip')
     os.rmdir(dirpath+'/data')
 
-dirpath = "/var/lib/postgresql/data/zip/"
+dirpath = "/home/data/zip/"
 infiles = [f for f in glob.glob(dirpath+"*.zip")]
 infiles.sort()
 dirlength = len(dirpath)
