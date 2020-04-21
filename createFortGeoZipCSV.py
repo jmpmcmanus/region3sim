@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/jmpmcmanus/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 
 import os
@@ -21,7 +21,7 @@ def createZipFile(dirpath, infile):
         df.to_csv(outcsvfile, encoding='utf-8', header=True, index=False)
 
 
-dirpath = '/home/jmpmcmanus/data/'
+dirpath = '/projects/regionthree/ingestProcessing/'
 infile = 'bp1_dp1r2b1c2h1l1_fort.63_mod.nc'
 createZipFile(dirpath, infile)
 

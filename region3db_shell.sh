@@ -1,1 +1,1 @@
-sudo docker exec -it region3db bash
+docker exec -it region3db_container bash

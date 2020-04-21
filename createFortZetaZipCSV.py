@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/jmpmcmanus/anaconda3/bin/python
 # -*- coding: utf-8 -*-
 
 import os, glob
@@ -55,7 +55,7 @@ def createZipFile(dirpath, infile):
 
             outzipfile.close()
 
-dirpath = '/home/jmpmcmanus/data/'
+dirpath = '/projects/regionthree/ingestProcessing/'
 infiles = [f for f in glob.glob(dirpath+"nc/"+"*.nc")]
 infiles.sort()
 infile = infiles[0]
