@@ -6,7 +6,7 @@ from psycopg2.extensions import AsIs
 
 def createtable(tablename, timeinterval):
     try:
-        conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' port='5432' password='adcirc'")
+        conn = psycopg2.connect("dbname='postgres' user='data' host='localhost' port='5432' password='adcirc'")
         cur = conn.cursor()
 
         cur.execute("""SET CLIENT_ENCODING TO UTF8""")

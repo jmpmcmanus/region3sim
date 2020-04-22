@@ -14,4 +14,4 @@ for file in files:
     filename = wget.download(url)
     prefix = "_".join(url.split('/')[7].split('_')[:2]).lower()
 
-    os.rename(filename,'/home/jmpmcmanus/data/nc/'+prefix+'_'+filename)
+    os.rename(filename,'/home/data/nc/'+prefix+'_'+filename)

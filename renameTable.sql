@@ -1,2 +1,0 @@
-ALTER TABLE bp1_dp1r2b1c2h1l1_fort
-RENAME TO bp1_dp1r2b1c2h1l1_fort_8i;
