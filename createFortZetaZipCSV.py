@@ -8,7 +8,9 @@ import numpy as np
 from datetime import datetime
 from zipfile import ZipFile
 import warnings
-warnings.filterwarnings("error")
+warnings.filterwarnings("ignore", message="numpy.dtype size changed")
+warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
+#warnings.filterwarnings("error")
 
 def createZipFile(dirpath, infile):
     if len([f for f in glob.glob(dirpath+"zip/"+"csvfort")]) == 0:
@@ -19,8 +21,6 @@ def createZipFile(dirpath, infile):
         startsecond = datetime.timestamp(startdate)
 
         time = nc.variables['time'][:].data
-        tindex = np.where(time > 1.5995402557e-314)[0]
-        time = nc.variables['time'][tindex].data.astype(int)
         lon =nc.variables['x'][:].data
 
         ntime = len(time)
@@ -36,18 +36,14 @@ def createZipFile(dirpath, infile):
                 outzipfile.close()
                 sys.exit('*** DeprecationWarning: elementwise comparison failed; this will raise an error in the future.')
 
-            zeta_mask = zeta.mask
             zeta_data = zeta.data
-            zeta_fill = zeta.fill_value
-            findex = np.where(zeta_data==zeta_fill)
-            zeta_data[findex] = np.nan
 
-            timestamp = np.array([datetime.fromtimestamp(startsecond+time[i]).strftime("%Y-%m-%dT%H:%M:%S")] * ncells)
+            timestamp = np.array([str(time[i])] * ncells)
 
-            df = pd.DataFrame({'node': node, 'zeta': zeta_data, 'mask': zeta_mask, 'timestamp': timestamp}, columns=['node', 'zeta', 'mask', 'timestamp'])
+            df = pd.DataFrame({'node': node, 'zeta': zeta_data, 'timestamp': timestamp}, columns=['node', 'zeta', 'timestamp'])
 
             outcsvfile = "_".join(infile.split('/')[len(infile.split('/'))-1].split('_')[0:2]) + '_' + \
-                  datetime.fromtimestamp(startsecond+time[i]).strftime("%Y-%m-%dT%H-%M-%S") + \
+                  str(time[i]) + \
                   '.fort.63_mod.csv'
             df.to_csv(dirpath+"zip/"+'csvfort/'+outcsvfile, encoding='utf-8', header=True, index=False)
             outzipfile.write(dirpath+"zip/"+'csvfort/'+outcsvfile)
