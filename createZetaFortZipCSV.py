@@ -13,8 +13,9 @@ warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 #warnings.filterwarnings("error")
 
 def createZipFile(dirpath, infile):
-    if len([f for f in glob.glob(dirpath+"zip/"+"csvfort")]) == 0:
-        os.mkdir(dirpath+"zip/"+"csvfort")
+    os.chdir(dirpath+"zip/")
+    if len([f for f in glob.glob("csvfort")]) == 0:
+        os.mkdir("csvfort")
 
     with xr.open_dataset(infile) as nc:
         startdate = datetime(2000,9,1,0,0,0)
@@ -28,7 +29,7 @@ def createZipFile(dirpath, infile):
         node = np.arange(ncells)
 
         for i in range(ntime):
-            outzipfile = ZipFile(dirpath+"zip/"+".".join(infile.split('/')[len(infile.split('/'))-1].split('.')[0:2])+'.zip','a')
+            outzipfile = ZipFile(".".join(infile.split('/')[len(infile.split('/'))-1].split('.')[0:2])+'.zip','a')
 
             try:
                 zeta = nc.variables['zeta'][i,:]
@@ -37,17 +38,18 @@ def createZipFile(dirpath, infile):
                 sys.exit('*** DeprecationWarning: elementwise comparison failed; this will raise an error in the future.')
 
             zeta_data = zeta.data
+            findex = np.where(zeta_data==min(zeta_data))
+            zeta_data[findex] = np.nan
 
             timestamp = np.array([str(time[i])] * ncells)
 
             df = pd.DataFrame({'node': node, 'zeta': zeta_data, 'timestamp': timestamp}, columns=['node', 'zeta', 'timestamp'])
 
             outcsvfile = "_".join(infile.split('/')[len(infile.split('/'))-1].split('_')[0:2]) + '_' + \
-                  str(time[i]) + \
-                  '.fort.63_mod.csv'
-            df.to_csv(dirpath+"zip/"+'csvfort/'+outcsvfile, encoding='utf-8', header=True, index=False)
-            outzipfile.write(dirpath+"zip/"+'csvfort/'+outcsvfile)
-            os.remove(dirpath+"zip/"+'csvfort/'+outcsvfile)
+                  str(time[i]) + '.fort.63_mod.csv'
+            df.to_csv('csvfort/'+outcsvfile, encoding='utf-8', header=True, index=False)
+            outzipfile.write('csvfort/'+outcsvfile)
+            os.remove('csvfort/'+outcsvfile)
 
             outzipfile.close()
 

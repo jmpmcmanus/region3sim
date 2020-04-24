@@ -15,7 +15,6 @@ def createtable(tablename, timeinterval):
         cur.execute("""CREATE TABLE %(table_name)s (
                 node INTEGER,
                 zeta NUMERIC,
-                mask CHARACTER(6),
                 timestamp TIMESTAMP WITHOUT TIME ZONE NOT NULL
             );""",
         {'table_name': AsIs(tablename)})
