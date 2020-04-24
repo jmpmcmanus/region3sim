@@ -22,7 +22,7 @@ def ingestData(dirpath,inzip):
         start_time = time.time()
         zipfort.extract(zipfile,path=dirpath)
 
-        stream = os.popen('timescaledb-parallel-copy --db-name postgres --table '+tablename+' --file '+dirpath+zipfile+' --skip-header --workers 4 --copy-options "CSV"')
+        stream = os.popen('timescaledb-parallel-copy --db-name postgres --connection "host=localhost user=data password=adcirc sslmode=disable" --table '+tablename+' --file '+dirpath+zipfile+' --skip-header --workers 4 --copy-options "CSV"')
         output = stream.read()
 
         os.remove(dirpath+zipfile)
