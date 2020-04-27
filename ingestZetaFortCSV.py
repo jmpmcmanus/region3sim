@@ -26,7 +26,7 @@ def ingestData(dirpath,inzip):
         output = stream.read()
 
         os.remove(dirpath+zipfile)
-        os.rmdir(dirpath+'/home/data/zip/csvfort')
+        os.rmdir(dirpath+'csvfort')
 
         stop_time = time.time()
         time_lapsed = stop_time - start_time
