@@ -5,9 +5,11 @@ import os, wget, sys
 
 ftype = sys.argv[1]
 
-f = open('files-thredds-'+ftype.strip(),'r')
+f = open('/home/data/region3sim/files-thredds-'+ftype.strip(),'r')
 files = f.readlines()
 f.close()
+
+os.chdir('/home/data/nc/')
 
 for file in files:
     url = file.strip()
