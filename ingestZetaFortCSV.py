@@ -37,8 +37,6 @@ def ingestData(dirpath,inzip):
         file.close()
 
     zipfort.close()
-    os.rmdir(dirpath+'/data/zip')
-    os.rmdir(dirpath+'/data')
 
 dirpath = "/home/data/zip/"
 infiles = [f for f in glob.glob(dirpath+"*.zip")]

@@ -44,5 +44,5 @@ dirlength = len(dirpath)
 
 for storm in storms:
     tablename = storm[dirlength:].split('.')[0].lower()
-    createtable(tablename,"8 hour")
+    createtable(tablename,"2 hour")
 
