@@ -15,7 +15,7 @@ AS $$
     SELECT ST_AsMVTGeom(ST_Transform(j.geom, 3857), bounds.geom) AS geom,
       j.node, j.zeta, j.timestamp, j.bathymetry
     FROM joined j, bounds
-    WHERE ST_Intersects(j.geom, ST_Transform(bounds.geom, 26910))
+    WHERE ST_Intersects(j.geom, ST_Transform(bounds.geom, 4326))
   )
   SELECT ST_AsMVT(mvtgeom, 'public.region3_sim_storms') FROM mvtgeom
 $$
